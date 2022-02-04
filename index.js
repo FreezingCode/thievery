@@ -46,6 +46,6 @@ app.get("/message", async (req, res) => {});
 
 var httpsServer = https.createServer(credentials, app);
 
-httpsServer.listen(8443, () => {
+httpsServer.listen(process.env.PORT, () => {
   console.log("Example app listening on port 8443");
 });
