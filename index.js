@@ -4,9 +4,9 @@ const express = require("express");
 const fs = require("fs");
 const pool = require("./db");
 
-const privateKey = fs.readFileSync("./server.key", "utf8");
-const certificate = fs.readFileSync("./server.cert", "utf8");
-const credentials = { key: privateKey, cert: certificate };
+// const privateKey = fs.readFileSync("./server.key", "utf8");
+// const certificate = fs.readFileSync("./server.cert", "utf8");
+// const credentials = { key: privateKey, cert: certificate };
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require("twilio")(accountSid, authToken);
@@ -44,7 +44,7 @@ app.get("/", async (req, res) => {
 
 app.get("/message", async (req, res) => {});
 
-var httpsServer = https.createServer(credentials, app);
+var httpsServer = https.createServer(app);
 
 httpsServer.listen(process.env.PORT, () => {
   console.log("Example app listening on port 8443");
