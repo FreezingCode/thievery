@@ -21,10 +21,9 @@ app.get("/", async (req, res) => {
 
   if (sensor_id !== undefined && sensor_val !== undefined) {
     try {
-      const result = await pool.query(
-        'SELECT * FROM public."Sensor" WHERE "Id" = $1',
-        [sensor_id]
-      );
+      const result = await pool.query("SELECT * FROM sensor WHERE id = $1;", [
+        sensor_id,
+      ]);
 
       if (result.rows.length > 0 && result.rows[0].Threshold <= sensor_val) {
         client.messages
@@ -37,6 +36,8 @@ app.get("/", async (req, res) => {
           .done();
       }
     } catch (err) {
+      console.log("err");
+      console.dir(err.message);
       res.json(err.message);
     }
   }
