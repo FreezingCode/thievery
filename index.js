@@ -18,32 +18,31 @@ app.use(express.json());
 app.get("/", async (req, res) => {
   let sensor_id = req.query.id;
   let sensor_val = req.query.value;
-  console.log("get /");
-  if (sensor_id !== undefined && sensor_val !== undefined) {
-    try {
-      console.log("try");
-      const result = await pool.query("SELECT * FROM sensor WHERE id = $1;", [
-        sensor_id,
-      ]);
+  res.send("Running");
+  // if (sensor_id !== undefined && sensor_val !== undefined) {
+  //   try {
+  //     console.log("try");
+  //     const result = await pool.query("SELECT * FROM sensor WHERE id = $1;", [
+  //       sensor_id,
+  //     ]);
 
-      if (result.rows.length > 0 && result.rows[0].Threshold <= sensor_val) {
-        client.messages
-          .create({
-            body: `Sensor ${sensor_id} has exceeded it's threshold value.`,
-            messagingServiceSid: process.env.TWILIO_MESSAGING_SID,
-            to: process.env.TWILIO_VERIFIED_NUMBER,
-          })
-          .then((message) => console.log(message.sid))
-          .done();
-      }
+  //     if (result.rows.length > 0 && result.rows[0].Threshold <= sensor_val) {
+  //       client.messages
+  //         .create({
+  //           body: `Sensor ${sensor_id} has exceeded it's threshold value.`,
+  //           messagingServiceSid: process.env.TWILIO_MESSAGING_SID,
+  //           to: process.env.TWILIO_VERIFIED_NUMBER,
+  //         })
+  //         .then((message) => console.log(message.sid))
+  //         .done();
+  //     }
 
-      res.json({});
-    } catch (err) {
-      console.log("err");
-      console.dir(err.message);
-      res.json(err.message);
-    }
-  }
+  //   } catch (err) {
+  //     console.log("err");
+  //     console.dir(err.message);
+  //     res.json(err.message);
+  //   }
+  // }
 });
 
 app.get("/message", async (req, res) => {});
