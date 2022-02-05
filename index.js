@@ -18,9 +18,10 @@ app.use(express.json());
 app.get("/", async (req, res) => {
   let sensor_id = req.query.id;
   let sensor_val = req.query.value;
-
+  console.log("get /");
   if (sensor_id !== undefined && sensor_val !== undefined) {
     try {
+      console.log("try");
       const result = await pool.query("SELECT * FROM sensor WHERE id = $1;", [
         sensor_id,
       ]);
@@ -35,6 +36,8 @@ app.get("/", async (req, res) => {
           .then((message) => console.log(message.sid))
           .done();
       }
+
+      res.json({});
     } catch (err) {
       console.log("err");
       console.dir(err.message);
