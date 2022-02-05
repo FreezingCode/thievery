@@ -5,7 +5,7 @@ CREATE TABLE Sensor(
     Description VARCHAR(255),
     Threshold INTEGER NOT NULL,
     UpdatedDate TIMESTAMP NULL,
-    IsSnoozed BIT NULL
+    IsSnoozed BOOLEAN DEFAULT false
 );
 
 INSERT INTO Sensor(Description, Threshold) VALUES ('Noise Sensor', 1000), ('Vibration Sensor', 1500);
